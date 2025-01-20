@@ -1,4 +1,7 @@
 extends CharacterBody3D
+# Emitted when the player was hit by a mob.
+# Put this at the top of the script.
+signal hit
 
 # How fast the player moves in meters per second.
 @export var speed = 14
@@ -66,3 +69,10 @@ func _physics_process(delta):
 	# Moving the Character
 	velocity = target_velocity
 	move_and_slide()
+	
+func die():
+	hit.emit()
+	queue_free()
+
+func _on_mob_detector_body_entered(body: Node3D) -> void:
+	die()
