@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://c1gc8f7c61c4m"]
+[gd_scene load_steps=12 format=3 uid="uid://c1gc8f7c61c4m"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_0eits"]
 [ext_resource type="PackedScene" uid="uid://bvqliwqghgwru" path="res://player.tscn" id="1_nsw7u"]
 [ext_resource type="PackedScene" uid="uid://d2kcmrhja2dg5" path="res://mob.tscn" id="2_1ew2y"]
+[ext_resource type="FontFile" uid="uid://bjylrc4rv2f2p" path="res://fonts/Montserrat-Medium.ttf" id="4_241y8"]
+[ext_resource type="Script" path="res://score_label.gd" id="5_waarw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ynyoa"]
 size = Vector3(60, 2, 60)
@@ -22,6 +24,10 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0)
 }
 point_count = 4
+
+[sub_resource type="Theme" id="Theme_hegs7"]
+default_font = ExtResource("4_241y8")
+default_font_size = 22
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0eits")
@@ -88,9 +94,14 @@ offset_bottom = 40.0
 
 [node name="ScoreLabel" type="Label" parent="UserInterface"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 52.0
+offset_top = 47.0
+offset_right = 113.0
+offset_bottom = 70.0
+theme = SubResource("Theme_hegs7")
+theme_override_colors/font_color = Color(0.0657844, 0.330037, 0.208546, 1)
 text = "Score: 0"
+script = ExtResource("5_waarw")
 
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
