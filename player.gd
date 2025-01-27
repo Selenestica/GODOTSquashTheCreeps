@@ -10,10 +10,10 @@ signal hit
 
 # Vertical impulse applied to the character upon bouncing over a mob in
 # meters per second.
-@export var bounce_impulse = 16
+@export var bounce_impulse = 22
 
 # Vertical impulse applied to the character upon jumping in meters per second.
-@export var jump_impulse = 20
+@export var jump_impulse = 22
 
 var target_velocity = Vector3.ZERO
 
@@ -32,6 +32,9 @@ func _physics_process(delta):
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
 		$Pivot.basis = Basis.looking_at(direction)
+		$AnimationPlayer.speed_scale = 4
+	else:
+		$AnimationPlayer.speed_scale = 1
 
 	# Ground Velocity
 	target_velocity.x = direction.x * speed
@@ -69,6 +72,8 @@ func _physics_process(delta):
 	# Moving the Character
 	velocity = target_velocity
 	move_and_slide()
+	
+	$Pivot.rotation.x = PI / 6 * velocity.y / jump_impulse
 	
 func die():
 	hit.emit()
