@@ -26,6 +26,8 @@ func _on_mob_timer_timeout():
 func _on_player_hit() -> void:
 	$MobTimer.stop()
 	$UserInterface/Retry.show()
+	var the_score = $UserInterface/ScoreLabel.score
+	$UserInterface/Retry/Label.text += "\nYour score was " + str(the_score) + "."
 	
 func _ready():
 	$UserInterface/Retry.hide()
