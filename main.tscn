@@ -1,10 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://c1gc8f7c61c4m"]
+[gd_scene load_steps=15 format=3 uid="uid://c1gc8f7c61c4m"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_0eits"]
 [ext_resource type="PackedScene" uid="uid://bvqliwqghgwru" path="res://player.tscn" id="1_nsw7u"]
 [ext_resource type="PackedScene" uid="uid://d2kcmrhja2dg5" path="res://mob.tscn" id="2_1ew2y"]
 [ext_resource type="FontFile" uid="uid://bjylrc4rv2f2p" path="res://fonts/Montserrat-Medium.ttf" id="4_241y8"]
 [ext_resource type="Script" path="res://score_label.gd" id="5_waarw"]
+[ext_resource type="AudioStream" uid="uid://bhhpsso7au4pc" path="res://art/New Recording.mp3" id="6_dmkom"]
+[ext_resource type="Script" path="res://mob_defeat_sfx.gd" id="7_2rrdx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ynyoa"]
 size = Vector3(60, 2, 60)
@@ -133,6 +135,10 @@ grow_vertical = 2
 text = "Oh no! 
 Press 'Space' to retry."
 label_settings = SubResource("LabelSettings_u545e")
+
+[node name="MobDefeatSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_dmkom")
+script = ExtResource("7_2rrdx")
 
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
